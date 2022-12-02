@@ -1,15 +1,28 @@
 ﻿using CodeEditor.Wpf.ViewModels;
 using CodeEditor.Wpf.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Windows;
 
 namespace CodeEditor.Wpf
 {
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        private readonly IHost _appHost;
+
+        public App()
         {
-            MainWindow = new MainView();
-            var dataContext = new MainViewModel();
+            _appHost = Host.CreateDefaultBuilder()
+                          .ConfigureServices(ConfigureServices)
+                          .Build();
+        }
+
+        protected async override void OnStartup(StartupEventArgs e)
+        {
+            await _appHost.StartAsync();
+
+            MainWindow = _appHost.Services.GetRequiredService<MainView>();
+            var dataContext = _appHost.Services.GetRequiredService<MainViewModel>();
             dataContext.RequestClose += CloseApplication;
             MainWindow.Show();
 
@@ -19,6 +32,19 @@ namespace CodeEditor.Wpf
         private void CloseApplication()
         {
             MainWindow.Close();
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await _appHost.StopAsync();
+
+            base.OnExit(e);
+        }
+
+        private void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
+        {
+            services.AddScoped<MainViewModel>();
+            services.AddScoped<MainView>();
         }
     }
 }
