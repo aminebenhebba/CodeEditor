@@ -9,9 +9,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EBEE29F3-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E13E06D0-BE57-43F4-B0D3-8CB3DC1E9E08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeEditor.Wpf", "src\CodeEditor.Wpf\CodeEditor.Wpf.csproj", "{1C799236-D967-493C-88C3-F80DB66C2BDE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C799236-D967-493C-88C3-F80DB66C2BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C799236-D967-493C-88C3-F80DB66C2BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C799236-D967-493C-88C3-F80DB66C2BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C799236-D967-493C-88C3-F80DB66C2BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1C799236-D967-493C-88C3-F80DB66C2BDE} = {F416BE75-4B28-4368-9B6B-B4992264ED90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2610D7AA-538D-4401-A67C-87D019865DED}
