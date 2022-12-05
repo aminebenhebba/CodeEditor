@@ -1,12 +1,262 @@
 ﻿<Window x:Class="CodeEditor.Wpf.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeEditor.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Code Editor" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Shared.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border Background="{StaticResource Background.Primary}"
+            BorderBrush="{StaticResource Border.Secondary}"
+            BorderThickness="1"
+            CornerRadius="10">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Logo-->
+                <Icon:PackIconMaterial Kind="ApplicationBraces" Foreground="{StaticResource Text.Foreground.Secondary}" Width="15" Height="15" Margin="10 0 5 0"  VerticalAlignment="Center"/>
+
+                <!--Menu-->
+                <Menu Grid.Column="1" VerticalAlignment="Center"
+                          Style="{DynamicResource MenuStyle1}"
+                          ItemContainerStyle="{DynamicResource MenuItemContainerStyle1}">
+                    <MenuItem Header="_File" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_New" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="File" Foreground="{StaticResource Background.White}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Open" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="Folder" Foreground="{StaticResource Background.Warning}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Save" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="ContentSave" Foreground="{StaticResource Background.info}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save _All" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="ContentSaveAll" Foreground="{StaticResource Background.info}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="_Exit" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="ExitToApp" Foreground="{StaticResource Background.Danger}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Tools" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_Check" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="play" Foreground="{StaticResource Background.Safe}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_File Tree" IsCheckable="True"
+                                      Checked="FileTreeChecked" Unchecked="FileTreeUnchecked"
+                                      Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="FileTree" Foreground="{StaticResource Background.Warning}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="_Console" IsCheckable="True"
+                                  Checked="ConsoleChecked" Unchecked="ConsoleUnchecked"
+                                  Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="Console" Foreground="{StaticResource Background.White}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Help" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_About" Background="{StaticResource Background.Primary}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="FileQuestion" Foreground="{StaticResource Background.info}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <!--Window title-->
+                <TextBlock Grid.Column="2" Text="Code Editor"
+                               MouseDown="Border_MouseDown"
+                               MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource Text.Foreground.Secondary}"/>
+
+                <!--Window control buttons-->
+                <Button Grid.Column="3" Style="{StaticResource MinMaxWindowButton}">
+                    <Icon:PackIconMaterial Kind="WindowMinimize" Width="8" Height="8"/>
+                </Button>
+                <Button Grid.Column="4" Style="{StaticResource MinMaxWindowButton}">
+                    <Icon:PackIconMaterial Kind="WindowMaximize" Width="8" Height="8"/>
+                </Button>
+                <Button Grid.Column="5" Style="{StaticResource CloseWindowButton}">
+                    <Icon:PackIconMaterial Kind="WindowClose" Width="8" Height="8"/>
+                </Button>
+
+            </Grid>
+
+            <!--Main content-->
+            <DockPanel Grid.Row="1">
+
+                <!--Tool bars-->
+                <ToolBarTray DockPanel.Dock="Top" Background="{StaticResource Background.Primary}">
+
+                    <ToolBar Style="{DynamicResource ToolBarStyle1}">
+                        <Button>
+                            <Icon:PackIconMaterial Kind="File" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.White}"/>
+                        </Button>
+                        <Button>
+                            <Icon:PackIconMaterial Kind="Folder" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.Warning}"/>
+                        </Button>
+                        <Button>
+                            <Icon:PackIconMaterial Kind="ContentSave" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.info}"/>
+                        </Button>
+                        <Button>
+                            <Icon:PackIconMaterial Kind="ContentSaveAll" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.info}"/>
+                        </Button>
+                    </ToolBar>
+
+                    <ToolBar Style="{DynamicResource ToolBarStyle1}">
+                        <CheckBox Checked="FileTreeChecked" Unchecked="FileTreeUnchecked">
+                            <Icon:PackIconMaterial Kind="FileTree" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.Warning}"/>
+                        </CheckBox>
+                        <CheckBox Checked="ConsoleChecked" Unchecked="ConsoleUnchecked">
+                            <Icon:PackIconMaterial Kind="Console" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.White}"/>
+                        </CheckBox>
+                        <Button>
+                            <Icon:PackIconMaterial Kind="play" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.Safe}"/>
+                        </Button>
+                    </ToolBar>
+
+                </ToolBarTray>
+
+                <!--Folders Treeview-->
+                <Expander Name="TreeViewExpander"
+                          Template="{StaticResource VerticalExpander}"
+                          IsExpanded="False"
+                          DockPanel.Dock="Left">
+                    <TreeView DockPanel.Dock="Left" Width="200" Background="{StaticResource Background.Primary}"
+                                  BorderBrush="{StaticResource Background.Secondary}"
+                                  Margin="5 10 2 5"/>
+                </Expander>
+
+                <StackPanel DockPanel.Dock="Bottom">
+                    <StatusBar Background="Transparent" Foreground="{StaticResource Text.Foreground.Secondary}">
+                        <StatusBar.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </StatusBar.ItemsPanel>
+
+                        <StatusBarItem Grid.Column="0">
+                            <TextBlock Text="Ln: 20 Ch: 24" />
+                        </StatusBarItem>
+
+                        <Separator Grid.Column="1" />
+
+                        <StatusBarItem Grid.Column="2">
+                            <TextBlock Text="File : New File.cs"/>
+                        </StatusBarItem>
+
+                        <Separator Grid.Column="3" />
+
+                        <StatusBarItem Grid.Column="4">
+                            <ProgressBar Value="50" Width="90" Height="16" />
+                        </StatusBarItem>
+                    </StatusBar>
+                </StackPanel>
+
+                <DockPanel>
+                    <Expander Name="ConsoleExpander"
+                              Template="{StaticResource HorizontalExpander}"
+                              DockPanel.Dock="Bottom">
+                        <StackPanel Margin="5">
+                            <TextBlock Text="Console :" Foreground="{StaticResource Text.Foreground.Secondary}"/>
+                            <RichTextBox Height="100"
+                                         IsReadOnly="True"
+                                         Background="{StaticResource Background.Secondary}"/>
+                        </StackPanel>
+                    </Expander>
+                    
+                    <TabControl Margin="5 10 5 0"
+                                Background="{StaticResource Background.Primary}" 
+                                BorderBrush="{StaticResource Border.Primary}">
+                        <TabItem Padding="0" Margin="0" Background="{StaticResource Background.Secondary}">
+                            <TabItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid Background="{StaticResource Background.Secondary}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="New File.cs"
+                                                   VerticalAlignment="Top" Background="Transparent"
+                                                   Foreground="{StaticResource Text.Foreground.Secondary}" Margin="5 0"/>
+
+                                        <Icon:PackIconMaterial Grid.Column="1" Kind="Close" Width="6" Height="6"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{StaticResource Text.Foreground.Light}"
+                                                               Margin="5 3 2 0"/>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </TabItem.HeaderTemplate>
+
+                            <RichTextBox Background="{StaticResource Background.Primary}"
+                                             BorderBrush="Transparent"
+                                             Foreground="{StaticResource Text.Foreground.Primary}"/>
+
+                        </TabItem>
+                    </TabControl>
+                </DockPanel>
+
+            </DockPanel>
+        </Grid>
+    </Border>
+
 </Window>
