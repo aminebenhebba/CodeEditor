@@ -176,41 +176,40 @@
                                   Margin="5 10 2 5"/>
                 </Expander>
 
-                <StackPanel DockPanel.Dock="Bottom">
-                    <StatusBar Background="Transparent" Foreground="{StaticResource Text.Foreground.Secondary}">
-                        <StatusBar.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="100" />
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
-                            </ItemsPanelTemplate>
-                        </StatusBar.ItemsPanel>
+                <StatusBar DockPanel.Dock="Bottom" Background="Transparent" Foreground="{StaticResource Text.Foreground.Secondary}">
+                    <StatusBar.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ItemsPanelTemplate>
+                    </StatusBar.ItemsPanel>
 
-                        <StatusBarItem Grid.Column="0">
-                            <TextBlock Text="Ln: 20 Ch: 24" />
-                        </StatusBarItem>
+                    <StatusBarItem Grid.Column="0">
+                        <TextBlock Text="Ln: 20 Ch: 24" />
+                    </StatusBarItem>
 
-                        <Separator Grid.Column="1" />
+                    <Separator Grid.Column="1" />
 
-                        <StatusBarItem Grid.Column="2">
-                            <TextBlock Text="File : New File.cs"/>
-                        </StatusBarItem>
+                    <StatusBarItem Grid.Column="2">
+                        <TextBlock Text="File : New File.cs"/>
+                    </StatusBarItem>
 
-                        <Separator Grid.Column="3" />
+                    <Separator Grid.Column="3" />
 
-                        <StatusBarItem Grid.Column="4">
-                            <ProgressBar Value="50" Width="90" Height="16" />
-                        </StatusBarItem>
-                    </StatusBar>
-                </StackPanel>
+                    <StatusBarItem Grid.Column="4">
+                        <ProgressBar Value="50" Width="90" Height="16" />
+                    </StatusBarItem>
+                </StatusBar>
 
                 <DockPanel>
+                    <!--Console-->
                     <Expander Name="ConsoleExpander"
                               Template="{StaticResource HorizontalExpander}"
                               DockPanel.Dock="Bottom">
@@ -222,6 +221,7 @@
                         </StackPanel>
                     </Expander>
                     
+                    <!--Code Tabs-->
                     <TabControl Margin="5 10 5 0"
                                 Background="{StaticResource Background.Primary}" 
                                 BorderBrush="{StaticResource Border.Primary}">
