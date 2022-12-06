@@ -35,22 +35,22 @@ namespace CodeEditor.Wpf.Views
 
         private void FileTreeChecked(object sender, RoutedEventArgs e)
         {
-            TreeViewExpander.IsExpanded = true;
+            if(TreeViewExpander != null) TreeViewExpander.IsExpanded = true;
         }
 
         private void FileTreeUnchecked(object sender, RoutedEventArgs e)
         {
-            TreeViewExpander.IsExpanded = false;
+            if (TreeViewExpander != null) TreeViewExpander.IsExpanded = false;
         }
 
         private void ConsoleChecked(object sender, RoutedEventArgs e)
         {
-            ConsoleExpander.IsExpanded = true;
+            if (ConsoleExpander != null) ConsoleExpander.IsExpanded = true;
         }
 
         private void ConsoleUnchecked(object sender, RoutedEventArgs e)
         {
-            ConsoleExpander.IsExpanded = false;
+            if (ConsoleExpander != null) ConsoleExpander.IsExpanded = false;
         }
     }
 }
