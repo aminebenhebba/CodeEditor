@@ -1,4 +1,6 @@
-﻿using CodeEditor.Wpf.ViewModels;
+﻿using CodeEditor.Wpf.Commands;
+using CodeEditor.Wpf.Services;
+using CodeEditor.Wpf.ViewModels;
 using CodeEditor.Wpf.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +26,7 @@ namespace CodeEditor.Wpf
             MainWindow = _appHost.Services.GetRequiredService<MainView>();
             var dataContext = _appHost.Services.GetRequiredService<MainViewModel>();
             dataContext.RequestClose += CloseApplication;
+            MainWindow.DataContext = dataContext;
             MainWindow.Show();
 
             base.OnStartup(e);
@@ -43,8 +46,11 @@ namespace CodeEditor.Wpf
 
         private void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
-            services.AddScoped<MainViewModel>();
-            services.AddScoped<MainView>();
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<MainView>();
+
+            services.AddSingleton<ICommandFactory, CommandFactory>();
+            services.AddTransient<ICompileService, CompileService>();
         }
     }
 }

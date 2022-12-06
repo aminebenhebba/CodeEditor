@@ -17,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
+    
     <Border Background="{StaticResource Background.Primary}"
             BorderBrush="{StaticResource Border.Secondary}"
             BorderThickness="1"
@@ -68,14 +68,16 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="_Exit" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_Exit" Background="{StaticResource Background.Primary}"
+                                  Command="{Binding ExitCommand}">
                             <MenuItem.Icon>
                                 <Icon:PackIconMaterial Kind="ExitToApp" Foreground="{StaticResource Background.Danger}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_Tools" Background="{StaticResource Background.Primary}">
-                        <MenuItem Header="_Check" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_Check" Background="{StaticResource Background.Primary}"
+                                  Command="{Binding CompileCommand}">
                             <MenuItem.Icon>
                                 <Icon:PackIconMaterial Kind="play" Foreground="{StaticResource Background.Safe}"/>
                             </MenuItem.Icon>
@@ -113,13 +115,16 @@
                                Foreground="{StaticResource Text.Foreground.Secondary}"/>
 
                 <!--Window control buttons-->
-                <Button Grid.Column="3" Style="{StaticResource MinMaxWindowButton}">
+                <Button Grid.Column="3" Style="{StaticResource MinMaxWindowButton}"
+                        Click="MinimizeWindowButton_Click">
                     <Icon:PackIconMaterial Kind="WindowMinimize" Width="8" Height="8"/>
                 </Button>
-                <Button Grid.Column="4" Style="{StaticResource MinMaxWindowButton}">
+                <Button Grid.Column="4" Style="{StaticResource MinMaxWindowButton}"
+                        Click="MaximizeWindowButton_Click">
                     <Icon:PackIconMaterial Kind="WindowMaximize" Width="8" Height="8"/>
                 </Button>
-                <Button Grid.Column="5" Style="{StaticResource CloseWindowButton}">
+                <Button Grid.Column="5" Style="{StaticResource CloseWindowButton}"
+                        Command="{Binding ExitCommand}">
                     <Icon:PackIconMaterial Kind="WindowClose" Width="8" Height="8"/>
                 </Button>
 
@@ -159,7 +164,7 @@
                             <Icon:PackIconMaterial Kind="Console" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.White}"/>
                         </CheckBox>
-                        <Button>
+                        <Button Command="{Binding CompileCommand}">
                             <Icon:PackIconMaterial Kind="play" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.Safe}"/>
                         </Button>
@@ -232,48 +237,28 @@
                               DockPanel.Dock="Bottom">
                         <StackPanel Margin="5">
                             <TextBlock Text="Console :" Foreground="{StaticResource Text.Foreground.Secondary}"/>
-                            <RichTextBox Height="100"
-                                         IsReadOnly="True"
-                                         Background="{StaticResource Background.Secondary}"/>
+                            <TextBox Height="100"
+                                     IsReadOnly="True"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     Background="{StaticResource Background.Secondary}"
+                                     Foreground="{StaticResource Text.Foreground.Primary}"
+                                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                     Text="{Binding Errors}"/>
                         </StackPanel>
                     </Expander>
                     
-                    <!--Code Tabs-->
-                    <TabControl Margin="5 10 5 0"
-                                Background="{StaticResource Background.Primary}" 
-                                BorderBrush="{StaticResource Border.Primary}">
-                        <TabItem Padding="0" Margin="0" Background="{StaticResource Background.Secondary}">
-                            <TabItem.HeaderTemplate>
-                                <DataTemplate>
-                                    <Grid Background="{StaticResource Background.Secondary}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Grid.Column="0" Text="New File.cs"
-                                                   VerticalAlignment="Top" Background="Transparent"
-                                                   Foreground="{StaticResource Text.Foreground.Secondary}" Margin="5 0"/>
-
-                                        <Icon:PackIconMaterial Grid.Column="1" Kind="Close" Width="6" Height="6"
-                                                               VerticalAlignment="Center"
-                                                               Foreground="{StaticResource Text.Foreground.Light}"
-                                                               Margin="5 3 2 0"/>
-
-                                    </Grid>
-                                </DataTemplate>
-                            </TabItem.HeaderTemplate>
-
-                            <RichTextBox Background="{StaticResource Background.Primary}"
-                                             BorderBrush="Transparent"
-                                             Foreground="{StaticResource Text.Foreground.Primary}"
-                                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                <FlowDocument FontFamily="JetBrains Mono" FontSize="14" LineHeight="2">
-                                    
-                                </FlowDocument>
-                            </RichTextBox>
-                        </TabItem>
-                    </TabControl>
+                    <!--Code-->
+                    <TextBox Background="{StaticResource Background.Primary}"
+                             BorderBrush="{StaticResource Border.Primary}"
+                             Foreground="{StaticResource Text.Foreground.Primary}"
+                             Margin="5 10 5 0"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                             FontFamily="JetBrains Mono"
+                             FontSize="14"
+                             Text="{Binding CurrentProgram, UpdateSourceTrigger=PropertyChanged}" />
                 </DockPanel>
 
             </DockPanel>

@@ -52,5 +52,22 @@ namespace CodeEditor.Wpf.Views
         {
             if (ConsoleExpander != null) ConsoleExpander.IsExpanded = false;
         }
+
+        private void MinimizeWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+            }
+        }
     }
 }
