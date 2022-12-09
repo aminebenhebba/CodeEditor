@@ -1,7 +1,9 @@
-﻿namespace CodeEditor.Wpf.Services
+﻿using Microsoft.CodeAnalysis.CSharp;
+
+namespace CodeEditor.Wpf.Services
 {
     public interface ICompileService
     {
-        string CheckProgram(string program);
+        string CheckProgram(string program, LanguageVersion languageVersion);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using CodeEditor.Wpf.Services;
 using CodeEditor.Wpf.ViewModels;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 
 namespace CodeEditor.Wpf.Commands
 {
@@ -16,13 +18,19 @@ namespace CodeEditor.Wpf.Commands
 
         public override void Execute(object? parameter)
         {
+            if (!_mainViewModel.ConsoleDisplay)
+            {
+                _mainViewModel.ConsoleDisplay = true;
+            }
+
             if (string.IsNullOrWhiteSpace(_mainViewModel.CurrentProgram))
             {
-                _mainViewModel.Errors = "Error: Empty Program";
+                _mainViewModel.Errors = "Empty Program - nothing to check !! please enter you code and try again.";
             }
             else
             {
-                _mainViewModel.Errors = _compileService.CheckProgram(_mainViewModel.CurrentProgram);
+                _mainViewModel.Errors = _compileService.CheckProgram(_mainViewModel.CurrentProgram,
+                    (LanguageVersion)Enum.Parse(typeof(LanguageVersion), _mainViewModel.SelectedCSharpVersion));
             }
         }
     }

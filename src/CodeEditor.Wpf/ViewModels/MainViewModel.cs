@@ -1,6 +1,9 @@
 ﻿using CodeEditor.Wpf.Commands;
 using CodeEditor.Wpf.Services;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace CodeEditor.Wpf.ViewModels
@@ -36,12 +39,55 @@ namespace CodeEditor.Wpf.ViewModels
             }
         }
 
+        public ObservableCollection<string> LanguageVergions { get; set; }
+
+        private string _selectedCSharpVersion;
+        public string SelectedCSharpVersion
+        {
+            get { return _selectedCSharpVersion; }
+            set
+            {
+                _selectedCSharpVersion = value;
+                OnPropertyChange(nameof(SelectedCSharpVersion));
+            }
+        }
+
+
+        private bool _consoleDisplay;
+        public bool ConsoleDisplay
+        {
+            get { return _consoleDisplay; }
+            set
+            {
+                _consoleDisplay = value;
+                OnPropertyChange(nameof(ConsoleDisplay));
+            }
+        }
+
+        private bool _fileTreeDisplay;
+        public bool FileTreeDisplay
+        {
+            get { return _fileTreeDisplay; }
+            set
+            {
+                _fileTreeDisplay = value;
+                OnPropertyChange(nameof(FileTreeDisplay));
+            }
+        }
+
         public ICommand CompileCommand { get; }
 
         public ICommand ExitCommand { get; }
 
         public MainViewModel(ICommandFactory commandFactory, ICompileService compileService)
         {
+            var listOfCSharpVersions = Enum.GetNames(typeof(LanguageVersion)).ToList();
+            LanguageVergions = new ObservableCollection<string>(listOfCSharpVersions);
+            SelectedCSharpVersion = listOfCSharpVersions[^1];
+
+            ConsoleDisplay = true;
+            FileTreeDisplay = true;
+
             CompileCommand = commandFactory.CreateCompileCommand(this, compileService);
             ExitCommand = commandFactory.CreateExitCommand(this);
         }

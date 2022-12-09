@@ -34,6 +34,7 @@
     <SolidColorBrush x:Key="Border.Secondary" Color="#5A5A5A"/>
 
     <SolidColorBrush x:Key="Text.Foreground.Primary" Color="White"/>
+    <SolidColorBrush x:Key="Text.Foreground.Black" Color="#1E1E1E"/>
     <SolidColorBrush x:Key="Text.Foreground.Secondary" Color="#DADADA"/>
     <SolidColorBrush x:Key="Text.Foreground.Light" Color="#AEAEAE"/>
 

@@ -29,7 +29,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0 0 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -82,14 +82,14 @@
                                 <Icon:PackIconMaterial Kind="play" Foreground="{StaticResource Background.Safe}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_File Tree" IsCheckable="True" IsChecked="True"
+                        <MenuItem Header="_File Tree" IsCheckable="True" IsChecked="{Binding FileTreeDisplay}"
                                       Checked="FileTreeChecked" Unchecked="FileTreeUnchecked"
                                       Background="{StaticResource Background.Primary}">
                             <MenuItem.Icon>
                                 <Icon:PackIconMaterial Kind="FileTree" Foreground="{StaticResource Background.Warning}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Console" IsCheckable="True" IsChecked="True"
+                        <MenuItem Header="_Console" IsCheckable="True" IsChecked="{Binding ConsoleDisplay}"
                                   Checked="ConsoleChecked" Unchecked="ConsoleUnchecked"
                                   Background="{StaticResource Background.Primary}">
                             <MenuItem.Icon>
@@ -132,10 +132,11 @@
             </Grid>
 
             <!--Main content-->
-            <DockPanel Grid.Row="1">
+            <DockPanel Grid.Row="1" Margin="5 0 5 5">
 
                 <!--Tool bars-->
-                <ToolBarTray DockPanel.Dock="Top" Background="{StaticResource Background.Primary}">
+                <ToolBarTray DockPanel.Dock="Top" Background="{StaticResource Background.Primary}"
+                             Margin="0 0 0 10">
 
                     <ToolBar Style="{DynamicResource ToolBarStyle1}">
                         <Button>
@@ -157,11 +158,11 @@
                     </ToolBar>
 
                     <ToolBar Style="{DynamicResource ToolBarStyle1}">
-                        <CheckBox Checked="FileTreeChecked" Unchecked="FileTreeUnchecked" IsChecked="True">
+                        <CheckBox Checked="FileTreeChecked" Unchecked="FileTreeUnchecked" IsChecked="{Binding FileTreeDisplay}">
                             <Icon:PackIconMaterial Kind="FileTree" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.Warning}"/>
                         </CheckBox>
-                        <CheckBox Checked="ConsoleChecked" Unchecked="ConsoleUnchecked" IsChecked="True" >
+                        <CheckBox Checked="ConsoleChecked" Unchecked="ConsoleUnchecked" IsChecked="{Binding ConsoleDisplay}" >
                             <Icon:PackIconMaterial Kind="Console" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.White}"/>
                         </CheckBox>
@@ -180,8 +181,7 @@
                           DockPanel.Dock="Left">
                     <TreeView DockPanel.Dock="Left" Width="200"
                               Background="{StaticResource Background.Primary}"
-                              BorderBrush="{StaticResource Background.Secondary}"
-                              Margin="5 10 2 5">
+                              BorderBrush="{StaticResource Background.Secondary}">
                         <TreeView.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type model:UserDirectory}" ItemsSource="{Binding Items}">
                                 <Label Content="{Binding Name}" />
@@ -193,7 +193,7 @@
                     </TreeView>
                 </Expander>
 
-                <StatusBar DockPanel.Dock="Bottom" Margin="5 0 5 5"
+                <StatusBar DockPanel.Dock="Bottom" Margin="5 0 0 0"
                            Background="{StaticResource Background.Primary}"
                            BorderBrush="{StaticResource Border.Primary}"
                            BorderThickness="1"
@@ -229,13 +229,32 @@
                     </StatusBarItem>
                 </StatusBar>
 
-                <DockPanel>
+                <DockPanel Margin="5 0 0 5">
+                    <!--Language version-->
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Code :" Foreground="{StaticResource Text.Foreground.Light}"/>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5 0">
+                            <Icon:PackIconMaterial Kind="LanguageCsharp" Width="12" Margin="5 0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource Text.Foreground.Secondary}"/>
+                            <ComboBox ItemsSource="{Binding LanguageVergions}"
+                                      SelectedValue="{Binding SelectedCSharpVersion}"
+                                      Height="20" FontSize="10" FontWeight="Bold"
+                                      Foreground="{StaticResource Text.Foreground.Black}"/>
+                        </StackPanel>
+                    </Grid>
+                    
                     <!--Console-->
                     <Expander Name="ConsoleExpander"
                               Template="{StaticResource HorizontalExpander}"
                               IsExpanded="True"
                               DockPanel.Dock="Bottom">
-                        <StackPanel Margin="5">
+                        <StackPanel>
                             <TextBlock Text="Console :" Foreground="{StaticResource Text.Foreground.Secondary}"/>
                             <TextBox Height="100"
                                      IsReadOnly="True"
@@ -252,7 +271,7 @@
                     <TextBox Background="{StaticResource Background.Primary}"
                              BorderBrush="{StaticResource Border.Primary}"
                              Foreground="{StaticResource Text.Foreground.Primary}"
-                             Margin="5 10 5 0"
+                             Margin="0 5 0 0"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
