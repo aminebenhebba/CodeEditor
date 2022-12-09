@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System.Linq;
 using System.Text;
 
@@ -74,17 +75,17 @@ namespace CodeEditor.Wpf.Services
             
             if (diagnostics.Any())
             {
-                // Error detected : prepare them for dispaly on the console
+                // Syntax Error detected : prepare them for dispaly on the console
                 foreach (var d in diagnostics)
                 {
-                    stringBuilder.AppendLine($"{d.Severity.ToString()}[{d.Id}] : Ln:{d.Location.GetLineSpan().StartLinePosition.Line+1} Ch:{d.Location.GetLineSpan().EndLinePosition.Character}. {d.GetMessage()}");
+                    stringBuilder.AppendLine($"{d.Severity.ToString()}[{d.Id}] : Ln:{d.Location.GetLineSpan().StartLinePosition.Line + 1} Ch:{d.Location.GetLineSpan().EndLinePosition.Character + 1}. {d.GetMessage()}");
                 }
             }
             else
             {
                 stringBuilder.AppendLine("Syntax Compilation Succeded.");
             }
-            
+
             return stringBuilder.ToString();
         }
     }

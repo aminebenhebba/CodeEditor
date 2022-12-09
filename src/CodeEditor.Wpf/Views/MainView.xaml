@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeEditor.Wpf"
+        xmlns:helper="clr-namespace:CodeEditor.Wpf.Helper"
         xmlns:model="clr-namespace:CodeEditor.Wpf.Models"
         mc:Ignorable="d"
         Title="Code Editor" Height="720" Width="1080" WindowStartupLocation="CenterScreen"
@@ -202,7 +203,9 @@
                         <ItemsPanelTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
@@ -213,18 +216,40 @@
                     </StatusBar.ItemsPanel>
 
                     <StatusBarItem Grid.Column="0">
-                        <TextBlock Text="Ln: 20 Ch: 24" />
+                        <Grid Width="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Ln:" />
+                            <TextBlock Grid.Column="1" Text="{Binding ElementName=CodeTextBox, Path=(helper:CaretBehavior.LineIndex)}"/>
+                        </Grid>
                     </StatusBarItem>
-
+                    
                     <Separator Grid.Column="1" />
-
+                    
                     <StatusBarItem Grid.Column="2">
-                        <TextBlock Text="File : New File.cs"/>
+                        <Grid Width="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0" Text="Ch:" />
+                            <TextBlock Grid.Column="1" Text="{Binding ElementName=CodeTextBox, Path=(helper:CaretBehavior.CharIndex)}"/>
+                        </Grid>
                     </StatusBarItem>
 
                     <Separator Grid.Column="3" />
 
                     <StatusBarItem Grid.Column="4">
+                        <TextBlock Text="File : New File.cs"/>
+                    </StatusBarItem>
+
+                    <Separator Grid.Column="5" />
+
+                    <StatusBarItem Grid.Column="6">
                         <ProgressBar Value="50" Width="90" Height="16" />
                     </StatusBarItem>
                 </StatusBar>
@@ -274,6 +299,8 @@
                              Margin="0 5 0 0"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
+                             Name="CodeTextBox"
+                             helper:CaretBehavior.ObserveCaret="True"
                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                              FontFamily="JetBrains Mono"
                              FontSize="14"
