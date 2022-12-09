@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 
 namespace CodeEditor.Wpf.Models
 {
@@ -8,10 +8,10 @@ namespace CodeEditor.Wpf.Models
         public ObservableCollection<UserDirectory> Subfolders { get; set; } = new ObservableCollection<UserDirectory>();
         public ObservableCollection<UserFile> Files { get; set; } = new ObservableCollection<UserFile>();
 
-        public String? DirectoryPath { get; set; }
-        public String? Name { get { return System.IO.Path.GetFileName(DirectoryPath); } }
+        public string? DirectoryPath { get; set; }
+        public string? Name { get { return Path.GetFileName(DirectoryPath); } }
 
-        public UserDirectory(String directoryPath)
+        public UserDirectory(string directoryPath)
         {
             DirectoryPath = directoryPath;
 
