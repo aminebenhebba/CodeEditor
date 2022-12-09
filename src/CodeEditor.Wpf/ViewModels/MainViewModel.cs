@@ -81,9 +81,12 @@ namespace CodeEditor.Wpf.ViewModels
 
         public MainViewModel(ICommandFactory commandFactory, ICompileService compileService)
         {
-            var listOfCSharpVersions = Enum.GetNames(typeof(LanguageVersion)).ToList();
+            var listOfCSharpVersions = Enum.GetValues<LanguageVersion>()
+                                           .ToList()
+                                           .Select(e => e.ToDisplayString());
+
             LanguageVergions = new ObservableCollection<string>(listOfCSharpVersions);
-            SelectedCSharpVersion = listOfCSharpVersions[^1];
+            SelectedCSharpVersion = listOfCSharpVersions.Last();
 
             ConsoleDisplay = true;
             FileTreeDisplay = true;

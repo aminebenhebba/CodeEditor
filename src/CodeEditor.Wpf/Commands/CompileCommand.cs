@@ -29,8 +29,10 @@ namespace CodeEditor.Wpf.Commands
             }
             else
             {
-                _mainViewModel.Errors = _compileService.CheckProgram(_mainViewModel.CurrentProgram,
-                    (LanguageVersion)Enum.Parse(typeof(LanguageVersion), _mainViewModel.SelectedCSharpVersion));
+                if(LanguageVersionFacts.TryParse(_mainViewModel.SelectedCSharpVersion, out var languageVersion))
+                {
+                    _mainViewModel.Errors = _compileService.CheckProgram(_mainViewModel.CurrentProgram,languageVersion);
+                }
             }
         }
     }
