@@ -108,11 +108,12 @@
 
                 <!--Window title-->
                 <TextBlock Grid.Column="2" Text="Code Editor"
-                               MouseDown="Border_MouseDown"
-                               MouseLeftButtonDown="Border_MouseLeftButtonDown"
-                               TextAlignment="Center"
-                               VerticalAlignment="Center"
-                               Foreground="{StaticResource Text.Foreground.Secondary}"/>
+                           MouseDown="Border_MouseDown"
+                           MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                           TextAlignment="Center"
+                           VerticalAlignment="Stretch"
+                           Padding="0 5 0 0"
+                           Foreground="{StaticResource Text.Foreground.Secondary}"/>
 
                 <!--Window control buttons-->
                 <Button Grid.Column="3" Style="{StaticResource MinMaxWindowButton}"
@@ -178,7 +179,6 @@
                           IsExpanded="True"
                           DockPanel.Dock="Left">
                     <TreeView DockPanel.Dock="Left" Width="200"
-                              
                               Background="{StaticResource Background.Primary}"
                               BorderBrush="{StaticResource Background.Secondary}"
                               Margin="5 10 2 5">
