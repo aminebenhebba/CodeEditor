@@ -19,5 +19,10 @@ namespace CodeEditor.Wpf.Commands
         {
             return new OpenFileCommand(mainViewModel, ioService);
         }
+
+        public SaveFileCommand CreateSaveFileCommand(MainViewModel mainViewModel, IIOService ioService)
+        {
+            return new SaveFileCommand(mainViewModel, ioService);
+        }
     }
 }

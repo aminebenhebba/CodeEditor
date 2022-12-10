@@ -18,6 +18,21 @@ namespace CodeEditor.Wpf.Services
             return dialog.FileName;
         }
 
+        public string SaveFileDialog()
+        {
+            var dialog = new SaveFileDialog
+            {
+                DefaultExt = "cs",
+                AddExtension = true,
+                Filter = "CS Files (.cs)|*.cs",
+                FilterIndex = 1
+            };
+
+            dialog.ShowDialog();
+
+            return dialog.FileName;
+        }
+
         public string ReadFile(string path)
         {
             var stream = File.OpenRead(path);
@@ -28,6 +43,17 @@ namespace CodeEditor.Wpf.Services
             stream.Close();
 
             return result;
+        }
+
+        public void SaveFile(string path, string fileContent)
+        {
+            var stream = File.Create(path);
+            var streamWriter = new StreamWriter(stream);
+
+            streamWriter.Write(fileContent);
+            streamWriter.Flush();
+
+            stream.Close();
         }
     }
 }
