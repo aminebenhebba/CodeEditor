@@ -19,7 +19,7 @@ namespace CodeEditor.Wpf.Commands
         {
             var path = _ioService.OpenFileDialog();
 
-            if (path != null)
+            if (!string.IsNullOrEmpty(path))
             {
                 _mainViewModel.SelectedPath = path;
 
