@@ -51,6 +51,7 @@ namespace CodeEditor.Wpf
 
             services.AddSingleton<ICommandFactory, CommandFactory>();
             services.AddTransient<ICompileService, CompileService>();
+            services.AddTransient<IIOService, IOService>();
         }
     }
 }

@@ -14,5 +14,10 @@ namespace CodeEditor.Wpf.Commands
         {
             return new ExitCommand(mainViewModel);
         }
+
+        public OpenFileCommand CreateOpenFileCommand(MainViewModel mainViewModel, IIOService ioService)
+        {
+            return new OpenFileCommand(mainViewModel, ioService);
+        }
     }
 }

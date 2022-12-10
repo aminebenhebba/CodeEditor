@@ -53,7 +53,8 @@
                                 <Icon:PackIconMaterial Kind="File" Foreground="{StaticResource Background.White}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Open" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_Open" Background="{StaticResource Background.Primary}"
+                                  Command="{Binding OpenFileCommand}">
                             <MenuItem.Icon>
                                 <Icon:PackIconMaterial Kind="Folder" Foreground="{StaticResource Background.Warning}"/>
                             </MenuItem.Icon>
@@ -144,7 +145,7 @@
                             <Icon:PackIconMaterial Kind="File" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.White}"/>
                         </Button>
-                        <Button>
+                        <Button Command="{Binding OpenFileCommand}">
                             <Icon:PackIconMaterial Kind="Folder" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.Warning}"/>
                         </Button>
@@ -244,7 +245,7 @@
                     <Separator Grid.Column="3" />
 
                     <StatusBarItem Grid.Column="4">
-                        <TextBlock Text="File : New File.cs"/>
+                        <TextBlock Text="{Binding FileName}"/>
                     </StatusBarItem>
 
                     <Separator Grid.Column="5" />

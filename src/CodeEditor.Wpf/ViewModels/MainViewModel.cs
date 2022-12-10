@@ -75,11 +75,26 @@ namespace CodeEditor.Wpf.ViewModels
             }
         }
 
+        public string SelectedPath { get; set; }
+
+        private string _fileName;
+        public string FileName
+        {
+            get { return _fileName; }
+            set
+            {
+                _fileName = value;
+                OnPropertyChange(nameof(FileName));
+            }
+        }
+
         public ICommand CompileCommand { get; }
 
         public ICommand ExitCommand { get; }
 
-        public MainViewModel(ICommandFactory commandFactory, ICompileService compileService)
+        public ICommand OpenFileCommand { get; }
+
+        public MainViewModel(ICommandFactory commandFactory, ICompileService compileService, IIOService ioService)
         {
             var listOfCSharpVersions = Enum.GetValues<LanguageVersion>()
                                            .ToList()
@@ -93,6 +108,7 @@ namespace CodeEditor.Wpf.ViewModels
 
             CompileCommand = commandFactory.CreateCompileCommand(this, compileService);
             ExitCommand = commandFactory.CreateExitCommand(this);
+            OpenFileCommand = commandFactory.CreateOpenFileCommand(this, ioService);
         }
     }
 }
