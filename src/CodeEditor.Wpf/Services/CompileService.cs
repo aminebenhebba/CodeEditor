@@ -15,63 +15,7 @@ namespace CodeEditor.Wpf.Services
 
             var stringBuilder = new StringBuilder();
 
-            switch (languageVersion)
-            {
-                case LanguageVersion.CSharp1:
-                    stringBuilder.AppendLine($"Roslyn : C#1 version of the language :");
-                    break;
-                case LanguageVersion.CSharp2:
-                    stringBuilder.AppendLine($"Roslyn :  C#2 version of the language :");
-                    break;
-                case LanguageVersion.CSharp3:
-                    stringBuilder.AppendLine($"Roslyn :  C#3 version of the language :");
-                break;
-                case LanguageVersion.CSharp4:
-                    stringBuilder.AppendLine($"Roslyn :  C#4 version of the language :");
-                    break;
-                case LanguageVersion.CSharp5:
-                    stringBuilder.AppendLine($"Roslyn :  C#5 version of the language :");
-                    break;
-                case LanguageVersion.CSharp6:
-                    stringBuilder.AppendLine($"Roslyn :  C#6 version of the language :");
-                    break;
-                case LanguageVersion.CSharp7:
-                    stringBuilder.AppendLine($"Roslyn :  C#7 version of the language :");
-                    break;
-                case LanguageVersion.CSharp7_1:
-                    stringBuilder.AppendLine($"Roslyn :  C#7.1 version of the language :");
-                    break;
-                case LanguageVersion.CSharp7_2:
-                    stringBuilder.AppendLine($"Roslyn :  C#7.2 version of the language :");
-                    break;
-                case LanguageVersion.CSharp7_3:
-                    stringBuilder.AppendLine($"Roslyn :  C#7.3 version of the language :");
-                    break;
-                case LanguageVersion.CSharp8:
-                    stringBuilder.AppendLine($"Roslyn :  C#8 version of the language :");
-                    break;
-                case LanguageVersion.CSharp9:
-                    stringBuilder.AppendLine($"Roslyn :  C#9 version of the language :");
-                    break;
-                case LanguageVersion.CSharp10:
-                    stringBuilder.AppendLine($"Roslyn :  C#10 version of the language :");
-                    break;
-                case LanguageVersion.CSharp11:
-                    stringBuilder.AppendLine($"Roslyn :  C#11 version of the language :");
-                    break;
-                case LanguageVersion.LatestMajor:
-                    stringBuilder.AppendLine($"Roslyn :  C# Latest Major version of the language :");
-                    break;
-                case LanguageVersion.Preview:
-                    stringBuilder.AppendLine($"Roslyn :  C# Preview version of the language :");
-                    break;
-                case LanguageVersion.Latest:
-                    stringBuilder.AppendLine($"Roslyn :  C# Latest version of the language :");
-                    break;
-                default:
-                    stringBuilder.AppendLine($"Roslyn :  C# Default version of the language :");
-                    break;
-            }
+            stringBuilder.AppendLine($"Roslyn : C# {languageVersion.ToDisplayString()} version of the language :");
             
             if (diagnostics.Any())
             {
