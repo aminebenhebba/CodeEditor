@@ -32,5 +32,13 @@ namespace CodeEditor.Wpf.Services
 
             return stringBuilder.ToString();
         }
+
+        public string FormatProgram(string program, LanguageVersion languageVersion)
+        {
+            var syntaxTree = CSharpSyntaxTree.ParseText(program, new CSharpParseOptions(languageVersion));
+            var root = syntaxTree.GetRoot();
+
+            return root.NormalizeWhitespace().ToString();
+        }
     }
 }

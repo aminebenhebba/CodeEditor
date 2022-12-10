@@ -29,5 +29,10 @@ namespace CodeEditor.Wpf.Commands
         {
             return new NewFileCommand(mainViewModel);
         }
+
+        public FormatCodeCommand CreateFormatCodeCommand(MainViewModel mainViewModel, ICompileService compileService)
+        {
+            return new FormatCodeCommand(mainViewModel, compileService);
+        }
     }
 }

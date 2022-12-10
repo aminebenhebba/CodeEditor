@@ -15,5 +15,7 @@ namespace CodeEditor.Wpf.Commands
         SaveFileCommand CreateSaveFileCommand(MainViewModel mainViewModel, IIOService ioService);
 
         NewFileCommand CreateNewFileCommand(MainViewModel mainViewModel);
+
+        FormatCodeCommand CreateFormatCodeCommand(MainViewModel mainViewModel, ICompileService compileService);
     }
 }

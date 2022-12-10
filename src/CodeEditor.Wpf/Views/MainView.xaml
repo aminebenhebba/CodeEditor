@@ -86,6 +86,12 @@
                                 <Icon:PackIconMaterial Kind="play" Foreground="{StaticResource Background.Safe}"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <MenuItem Header="For_mat" Background="{StaticResource Background.Primary}"
+                                  Command="{Binding FormatCodeCommand}">
+                            <MenuItem.Icon>
+                                <Icon:PackIconMaterial Kind="ClipboardCheckOutline" Foreground="{StaticResource Background.White}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="_File Tree" IsCheckable="True" IsChecked="{Binding FileTreeDisplay}"
                                       Checked="FileTreeChecked" Unchecked="FileTreeUnchecked"
                                       Background="{StaticResource Background.Primary}">
@@ -93,7 +99,7 @@
                                 <Icon:PackIconMaterial Kind="FileTree" Foreground="{StaticResource Background.Warning}"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="_Console" IsCheckable="True" IsChecked="{Binding ConsoleDisplay}"
+                        <MenuItem Header="Con_sole" IsCheckable="True" IsChecked="{Binding ConsoleDisplay}"
                                   Checked="ConsoleChecked" Unchecked="ConsoleUnchecked"
                                   Background="{StaticResource Background.Primary}">
                             <MenuItem.Icon>
@@ -173,6 +179,10 @@
                         <Button Command="{Binding CompileCommand}">
                             <Icon:PackIconMaterial Kind="play" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.Safe}"/>
+                        </Button>
+                        <Button Command="{Binding FormatCodeCommand}">
+                            <Icon:PackIconMaterial Kind="ClipboardCheckOutline" Width="15" Height="15"
+                                                       Foreground="{StaticResource Background.White}"/>
                         </Button>
                     </ToolBar>
 

@@ -75,10 +75,10 @@ namespace CodeEditor.Wpf.ViewModels
             }
         }
 
-        public string SelectedPath { get; set; }
+        public string? SelectedPath { get; set; }
 
-        private string _fileName;
-        public string FileName
+        private string? _fileName;
+        public string? FileName
         {
             get { return _fileName; }
             set
@@ -98,6 +98,8 @@ namespace CodeEditor.Wpf.ViewModels
 
         public ICommand NewFileCommand { get; }
 
+        public ICommand FormatCodeCommand { get; }
+
         public MainViewModel(ICommandFactory commandFactory, ICompileService compileService, IIOService ioService)
         {
             var listOfCSharpVersions = Enum.GetValues<LanguageVersion>()
@@ -110,11 +112,14 @@ namespace CodeEditor.Wpf.ViewModels
             ConsoleDisplay = true;
             FileTreeDisplay = true;
 
+            FileName = "<New> ...";
+
             CompileCommand = commandFactory.CreateCompileCommand(this, compileService);
             ExitCommand = commandFactory.CreateExitCommand(this);
             OpenFileCommand = commandFactory.CreateOpenFileCommand(this, ioService);
             SaveFileCommand = commandFactory.CreateSaveFileCommand(this, ioService);
             NewFileCommand = commandFactory.CreateNewFileCommand(this);
+            FormatCodeCommand = commandFactory.CreateFormatCodeCommand(this, compileService);
         }
     }
 }
