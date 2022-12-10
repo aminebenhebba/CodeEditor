@@ -96,6 +96,8 @@ namespace CodeEditor.Wpf.ViewModels
 
         public ICommand SaveFileCommand { get; }
 
+        public ICommand NewFileCommand { get; }
+
         public MainViewModel(ICommandFactory commandFactory, ICompileService compileService, IIOService ioService)
         {
             var listOfCSharpVersions = Enum.GetValues<LanguageVersion>()
@@ -112,6 +114,7 @@ namespace CodeEditor.Wpf.ViewModels
             ExitCommand = commandFactory.CreateExitCommand(this);
             OpenFileCommand = commandFactory.CreateOpenFileCommand(this, ioService);
             SaveFileCommand = commandFactory.CreateSaveFileCommand(this, ioService);
+            NewFileCommand = commandFactory.CreateNewFileCommand(this);
         }
     }
 }

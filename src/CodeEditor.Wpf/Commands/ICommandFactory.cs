@@ -1,5 +1,6 @@
 ﻿using CodeEditor.Wpf.Services;
 using CodeEditor.Wpf.ViewModels;
+using System.Windows.Input;
 
 namespace CodeEditor.Wpf.Commands
 {
@@ -12,5 +13,7 @@ namespace CodeEditor.Wpf.Commands
         OpenFileCommand CreateOpenFileCommand(MainViewModel mainViewModel, IIOService ioService);
 
         SaveFileCommand CreateSaveFileCommand(MainViewModel mainViewModel, IIOService ioService);
+
+        NewFileCommand CreateNewFileCommand(MainViewModel mainViewModel);
     }
 }

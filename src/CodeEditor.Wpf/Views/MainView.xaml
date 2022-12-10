@@ -48,7 +48,8 @@
                           Style="{DynamicResource MenuStyle1}"
                           ItemContainerStyle="{DynamicResource MenuItemContainerStyle1}">
                     <MenuItem Header="_File" Background="{StaticResource Background.Primary}">
-                        <MenuItem Header="_New" Background="{StaticResource Background.Primary}">
+                        <MenuItem Header="_New" Background="{StaticResource Background.Primary}"
+                                  Command="{Binding NewFileCommand}">
                             <MenuItem.Icon>
                                 <Icon:PackIconMaterial Kind="File" Foreground="{StaticResource Background.White}"/>
                             </MenuItem.Icon>
@@ -142,7 +143,7 @@
                              Margin="0 0 0 10">
 
                     <ToolBar Style="{DynamicResource ToolBarStyle1}">
-                        <Button>
+                        <Button Command="{Binding NewFileCommand}">
                             <Icon:PackIconMaterial Kind="File" Width="15" Height="15"
                                                        Foreground="{StaticResource Background.White}"/>
                         </Button>
