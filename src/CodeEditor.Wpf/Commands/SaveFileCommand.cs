@@ -21,6 +21,9 @@ namespace CodeEditor.Wpf.Commands
             if (!string.IsNullOrEmpty(_mainViewModel.SelectedPath))
             {
                 _ioService.SaveFile(_mainViewModel.SelectedPath, _mainViewModel.CurrentProgram?? "");
+
+                _mainViewModel.Errors = "";
+
                 return;
             }
 
@@ -34,6 +37,8 @@ namespace CodeEditor.Wpf.Commands
 
                 _mainViewModel.FileName = Path.GetFileName(path);
             }
+
+            _mainViewModel.Errors = "";
         }
     }
 }

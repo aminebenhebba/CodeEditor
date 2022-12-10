@@ -27,6 +27,8 @@ namespace CodeEditor.Wpf.Commands
 
                 _mainViewModel.FileName = Path.GetFileName(path);
             }
+
+            _mainViewModel.Errors = "";
         }
     }
 }
